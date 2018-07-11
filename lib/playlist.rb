@@ -1,5 +1,6 @@
 require 'playlist/version'
 
+# Data model class that for a single playlist
 class Playlist
   attr_accessor :title
   attr_accessor :creator
@@ -10,21 +11,17 @@ class Playlist
 
   attr_reader :tracks
 
-  def initialize(attr={})
+  def initialize(attr = {})
     @tracks = []
-    attr.each_pair do |key,value|
-      self.send("#{key}=", value)
+    attr.each_pair do |key, value|
+      send("#{key}=", value)
     end
 
     yield(self) if block_given?
   end
 
   def add_track(args)
-    if args.is_a?(Track)
-      @tracks << args
-    else
-      @tracks << Track.new(args)
-    end
+    @tracks << args.is_a?(Track) ? args : Track.new(args)
   end
 
   autoload :Track, 'playlist/track'

@@ -14,7 +14,11 @@ describe Playlist::Track do
 
   describe '#to_h' do
     it 'returns all the track attributes as a Hash' do
-      attr = {:location => 'filename.mp3', :title => 'Track Title', :duration => 10}
+      attr = {
+        :location => 'filename.mp3',
+        :title => 'Track Title',
+        :duration => 10
+      }
       track = Playlist::Track.new(attr)
       expect(track.to_h).to eq(attr)
     end
