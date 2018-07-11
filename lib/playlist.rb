@@ -21,7 +21,7 @@ class Playlist
   end
 
   def add_track(args)
-    @tracks << args.is_a?(Track) ? args : Track.new(args)
+    @tracks << (args.is_a?(Track) ? args : Track.new(args))
   end
 
   autoload :Track, 'playlist/track'
