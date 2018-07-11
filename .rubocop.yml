@@ -23,3 +23,7 @@ MethodLength:
 
 Metrics/AbcSize:
   Max: 20
+
+# Allow long blocks in rspec
+Metrics/BlockLength:
+  ExcludedMethods: ['describe', 'context']

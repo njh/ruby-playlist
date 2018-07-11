@@ -25,4 +25,5 @@ class Playlist
   end
 
   autoload :Track, 'playlist/track'
+  autoload :Format, 'playlist/format'
 end
