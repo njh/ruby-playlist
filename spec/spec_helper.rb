@@ -1,11 +1,11 @@
 $LOAD_PATH.unshift File.expand_path('../lib', __dir__)
 
-require 'rubygems'
 require 'bundler'
+require 'simplecov'
 
-Bundler.require(:default, :development)
-
-SimpleCov.start
+SimpleCov.start do
+  add_filter '/spec/'
+end
 
 require 'playlist'
 
