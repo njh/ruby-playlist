@@ -1,6 +1,8 @@
 $LOAD_PATH.unshift File.expand_path('../lib', __dir__)
 
 require 'bundler'
+require 'rspec/matchers'
+require 'equivalent-xml'
 require 'simplecov'
 
 SimpleCov.start do
