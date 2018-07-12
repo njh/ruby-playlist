@@ -18,6 +18,14 @@ class Playlist::Track
     yield(self) if block_given?
   end
 
+  def artist
+    @creator
+  end
+
+  def artist=(artist)
+    @creator = artist
+  end
+
   def to_h
     Hash[
       instance_variables.map do |v|

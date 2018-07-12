@@ -16,14 +16,14 @@ module Playlist::Format::SimpleText
       if line =~ /^(\d{1,2}[:.]\d{1,2}([:.]\d{1,2})?)?\s*(.+?) - (.+?)$/
         Playlist::Track.new(
           :start_time => Regexp.last_match(1),
-          :creator => Regexp.last_match(3).strip,
+          :artist => Regexp.last_match(3).strip,
           :title => Regexp.last_match(4).strip
         )
       end
     end
 
     def generate(playlist)
-      playlist.tracks.map { |t| "#{t.creator} - #{t.title}" }.join("\n") + "\n"
+      playlist.tracks.map { |t| "#{t.artist} - #{t.title}" }.join("\n") + "\n"
     end
   end
 end
