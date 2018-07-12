@@ -29,9 +29,12 @@ module Playlist::Format::XSPF
 
     def parse_track(doc)
       Playlist::Track.new do |track|
-        track.creator = inner_text_or_nil(doc, 'creator')
-        track.title = inner_text_or_nil(doc, 'title')
-        track.location = inner_text_or_nil(doc, 'location')
+        track.creator = inner_text_or_nil(doc, 'xmlns:creator')
+        track.title = inner_text_or_nil(doc, 'xmlns:title')
+        track.location = inner_text_or_nil(doc, 'xmlns:location')
+        if (duration = inner_text_or_nil(doc, 'xmlns:duration'))
+          track.duration = duration.to_f / 1000
+        end
       end
     end
 
@@ -40,12 +43,13 @@ module Playlist::Format::XSPF
         xml.location(track.location) unless track.location.nil?
         xml.title(track.title) unless track.title.nil?
         xml.creator(track.creator) unless track.creator.nil?
+        xml.duration((track.duration * 1000).to_i) unless track.duration.nil?
       end
     end
 
     ## FIXME: how to do this better?
     def inner_text_or_nil(doc, path)
-      element = doc.at(path)
+      element = doc.at_xpath(path)
       element.inner_text unless element.nil?
     end
   end

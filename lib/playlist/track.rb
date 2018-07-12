@@ -5,6 +5,9 @@ class Playlist::Track
   attr_accessor :creator
   attr_accessor :album
   attr_accessor :start_time
+
+  # The duration of the track in seconds.
+  # May be a Float to include fractions of a second.
   attr_accessor :duration
 
   def initialize(attr = {})

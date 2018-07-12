@@ -6,11 +6,13 @@
       <location>one_one_one.mp3</location>
       <title>One One One</title>
       <creator>Hot Chip</creator>
+      <duration>215000</duration>
     </track>
     <track>
       <location>song2.mp3</location>
       <title>Song 2</title>
       <creator>Blur</creator>
+      <duration>110000</duration>
      </track>
   </trackList>
 </playlist>
