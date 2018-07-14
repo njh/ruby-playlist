@@ -7,7 +7,7 @@ module Playlist::Format::M3U
         input.each_line do |line|
           if line =~ /^#EXTINF:(-?\d+),\s*(.+?)\s*-\s*(.+?)\s*$/
             track.duration = Regexp.last_match(1)
-            track.artist = Regexp.last_match(2)
+            track.creator = Regexp.last_match(2)
             track.title = Regexp.last_match(3)
           else
             if line =~ /^[^#]\S+.+\s*$/

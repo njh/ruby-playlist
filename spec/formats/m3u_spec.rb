@@ -10,14 +10,14 @@ describe Playlist::Format::M3U do
       end
 
       it 'parses the duration, artist, title and location from Track 1' do
-        expect(playlist.tracks[0].artist).to eq('Hot Chip')
+        expect(playlist.tracks[0].creator).to eq('Hot Chip')
         expect(playlist.tracks[0].title).to eq('One One One')
         expect(playlist.tracks[0].duration).to eq(215)
         expect(playlist.tracks[0].location).to eq('one_one_one.mp3')
       end
 
       it 'parses the duration, artist, title and location from Track 2' do
-        expect(playlist.tracks[1].artist).to eq('Blur')
+        expect(playlist.tracks[1].creator).to eq('Blur')
         expect(playlist.tracks[1].title).to eq('Song 2')
         expect(playlist.tracks[1].duration).to eq(110)
         expect(playlist.tracks[1].location).to eq('song2.mp3')
@@ -31,13 +31,13 @@ describe Playlist::Format::M3U do
       playlist.add_track(
         :location => 'one_one_one.mp3',
         :title => 'One One One',
-        :artist => 'Hot Chip',
+        :creator => 'Hot Chip',
         :duration => 215
       )
       playlist.add_track(
         :location => 'song2.mp3',
         :title => 'Song 2',
-        :artist => 'Blur',
+        :creator => 'Blur',
         :duration => 110
       )
 

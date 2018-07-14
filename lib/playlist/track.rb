@@ -2,7 +2,6 @@
 class Playlist::Track
   attr_accessor :location
   attr_accessor :title
-  attr_accessor :creator
   attr_accessor :album
 
   # The time a track starts playing at, in seconds.
@@ -25,13 +24,25 @@ class Playlist::Track
     yield(self) if block_given?
   end
 
-  def artist
-    @creator
+  def creator
+    contributor_names(nil)
   end
 
-  def artist=(artist)
-    @creator = artist
+  def creator=(name)
+    replace_contributor(nil, name)
   end
+
+  # Get a conactinated list of performers for this track
+  # If there are no performers, return contributors with no role
+  def performer
+    contributor_names(:performer) || contributor_names(nil)
+  end
+  alias artist performer
+
+  def performer=(name)
+    replace_contributor(:performer, name)
+  end
+  alias artist= performer=
 
   def duration=(seconds)
     if seconds.is_a?(Numeric)
@@ -53,6 +64,12 @@ class Playlist::Track
                      else
                        Playlist::Contributor.new(args)
                      end
+  end
+
+  # First deletes any contribitors with same role, then adds a new contributor
+  def replace_contributor(role, name)
+    @contributors.delete_if { |c| c.role == role }
+    add_contributor(:role => role, :name => name)
   end
 
   def contributor_names(role = :any)

@@ -66,6 +66,10 @@ describe Playlist::Track do
   describe '#contributor_names' do
     let(:track) { Playlist::Track.new(:title => 'Let Me Live') }
 
+    it 'should return nil if there are no contributors' do
+      expect(track.contributor_names).to be_nil
+    end
+
     it 'should join the names together a single performer' do
       track.add_contributor(:name => 'Rudimental', :role => :performer)
       expect(track.contributors.count).to eq(1)
