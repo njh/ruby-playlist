@@ -24,6 +24,7 @@ class Playlist
     @tracks << (args.is_a?(Track) ? args : Track.new(args))
   end
 
+  autoload :Contributor, 'playlist/contributor'
   autoload :Track, 'playlist/track'
   autoload :Format, 'playlist/format'
 end

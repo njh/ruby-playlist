@@ -13,7 +13,11 @@ class Playlist::Track
   # May be a Float to include fractions of a second.
   attr_reader :duration
 
+  # A list of people or groups who contributed to the track
+  attr_reader :contributors
+
   def initialize(attr = {})
+    @contributors = []
     attr.each_pair do |key, value|
       send("#{key}=", value)
     end
@@ -41,6 +45,28 @@ class Playlist::Track
                   end
     end
     @duration = nil if [0, -1].include?(@duration)
+  end
+
+  def add_contributor(args)
+    @contributors << if args.is_a?(Playlist::Contributor)
+                       args
+                     else
+                       Playlist::Contributor.new(args)
+                     end
+  end
+
+  def contributor_names(role = :any)
+    filtered = if role == :any
+                 @contributors
+               else
+                 @contributors.find_all { |c| c.role == role }
+               end
+    if filtered.count == 1
+      filtered.first.name
+    elsif filtered.count >= 2
+      filtered[0..-2].map(&:name).join(', ') +
+        ' & ' + filtered.last.name
+    end
   end
 
   def to_h

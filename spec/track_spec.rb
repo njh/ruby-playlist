@@ -38,6 +38,86 @@ describe Playlist::Track do
     end
   end
 
+  describe '#add_contributor=' do
+    let(:track) { Playlist::Track.new }
+
+    it 'should add a contributor with an object' do
+      contributor = Playlist::Contributor.new(:name => 'A Contibutor')
+      track.add_contributor(contributor)
+      expect(track.contributors.count).to eq(1)
+      expect(track.contributors.first.name).to eq('A Contibutor')
+    end
+
+    it 'should add a contributor with a name and role' do
+      track.add_contributor(:name => 'Jamie xx', :role => :performer)
+      expect(track.contributors.count).to eq(1)
+      expect(track.contributors.first.name).to eq('Jamie xx')
+      expect(track.contributors.first.role).to eq(:performer)
+    end
+
+    it 'should add a contributor with just a name' do
+      track.add_contributor('A Contibutor')
+      expect(track.contributors.count).to eq(1)
+      expect(track.contributors.first.name).to eq('A Contibutor')
+      expect(track.contributors.first.role).to be_nil
+    end
+  end
+
+  describe '#contributor_names' do
+    let(:track) { Playlist::Track.new(:title => 'Let Me Live') }
+
+    it 'should join the names together a single performer' do
+      track.add_contributor(:name => 'Rudimental', :role => :performer)
+      expect(track.contributors.count).to eq(1)
+      expect(track.contributor_names).to eq('Rudimental')
+    end
+
+    it 'should join the names together for two performers' do
+      track.add_contributor(:name => 'Rudimental', :role => :performer)
+      track.add_contributor(:name => 'Major Lazer', :role => :performer)
+      expect(track.contributors.count).to eq(2)
+      expect(track.contributor_names).to eq('Rudimental & Major Lazer')
+    end
+
+    it 'should join the names together for three performers' do
+      track.add_contributor(:name => 'Rudimental', :role => :performer)
+      track.add_contributor(:name => 'Major Lazer', :role => :performer)
+      track.add_contributor(:name => 'Anne‐Marie', :role => :performer)
+      expect(track.contributors.count).to eq(3)
+      expect(track.contributor_names).to eq(
+        'Rudimental, Major Lazer & Anne‐Marie'
+      )
+    end
+
+    it 'should join the names together for four performers' do
+      track.add_contributor(:name => 'Rudimental', :role => :performer)
+      track.add_contributor(:name => 'Major Lazer', :role => :performer)
+      track.add_contributor(:name => 'Anne‐Marie', :role => :performer)
+      track.add_contributor(:name => 'Mr. Eazi', :role => :performer)
+      expect(track.contributors.count).to eq(4)
+      expect(track.contributor_names).to eq(
+        'Rudimental, Major Lazer, Anne‐Marie & Mr. Eazi'
+      )
+    end
+
+    it 'should filter the contributors if a role is given' do
+      track.add_contributor(:name => 'Rudimental', :role => :performer)
+      track.add_contributor(:name => 'Amir Izadkhah', :role => :composer)
+      expect(track.contributors.count).to eq(2)
+      expect(track.contributor_names(:performer)).to eq('Rudimental')
+      expect(track.contributor_names(:composer)).to eq('Amir Izadkhah')
+      expect(track.contributor_names(:any)).to eq('Rudimental & Amir Izadkhah')
+    end
+
+    it 'should filter the contributors without a role if nil is given' do
+      track.add_contributor('Rudimental')
+      track.add_contributor('Major Lazer')
+      track.add_contributor(:name => 'Amir Izadkhah', :role => :composer)
+      expect(track.contributors.count).to eq(3)
+      expect(track.contributor_names(nil)).to eq('Rudimental & Major Lazer')
+    end
+  end
+
   describe '#to_h' do
     it 'returns all the track attributes as a Hash' do
       attr = {
@@ -46,7 +126,7 @@ describe Playlist::Track do
         :duration => 10
       }
       track = Playlist::Track.new(attr)
-      expect(track.to_h).to eq(attr)
+      expect(track.to_h).to eq(attr.merge(:contributors => []))
     end
   end
 end
