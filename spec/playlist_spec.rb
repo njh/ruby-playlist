@@ -22,4 +22,21 @@ describe Playlist do
       expect(playlist.tracks[1].title).to eq('Song 2')
     end
   end
+
+  describe '#duration' do
+    it 'should return the total duration of a playlist' do
+      playlist = Playlist.new
+      playlist.add_track(:duration => 215, :title => 'One One One')
+      playlist.add_track(:duration => 110, :title => 'Song 2')
+      expect(playlist.duration).to eq(325)
+    end
+
+    it 'should ignore tracks that have no duration' do
+      playlist = Playlist.new
+      playlist.add_track(:duration => 215, :title => 'One One One')
+      playlist.add_track(:duration => 110, :title => 'Song 2')
+      playlist.add_track(:duration => nil, :title => 'Unknown')
+      expect(playlist.duration).to eq(325)
+    end
+  end
 end
