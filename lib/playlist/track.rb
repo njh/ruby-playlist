@@ -1,8 +1,25 @@
 # Data model class that represents a single track
 class Playlist::Track
+  # A URI (or filename) to the location of the file
   attr_accessor :location
+
+  # The title of the track
   attr_accessor :title
+
+  # The name of the album that the track came from
   attr_accessor :album
+
+  # The number of the track on the album it came from
+  attr_accessor :track_number
+
+  # The side of disc if the track came from a vinyl album (eg A/B)
+  attr_accessor :side
+
+  # The name of the record label that published the track/album
+  attr_accessor :record_label
+
+  # The name of the publisher that published the score/lyrics of the song
+  attr_accessor :publisher
 
   # The time a track starts playing at, in seconds.
   # May be a Float to include fractions of a second.
