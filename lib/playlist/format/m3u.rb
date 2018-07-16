@@ -1,6 +1,10 @@
 # Module to parse and generate M3U playlists
 module Playlist::Format::M3U
   class << self
+    # Parse a M3U file into a [Playlist]
+    # @param input any object that responds to #each_line
+    #        (either a String or a IO object)
+    # @return [Playlist] a new Playlist object
     def parse(input)
       Playlist.new do |playlist|
         track = Playlist::Track.new
@@ -20,6 +24,9 @@ module Playlist::Format::M3U
       end
     end
 
+    # Generate a M3U file from a [Playlist]
+    # @param playlist [Playlist] the playlist to be converted to M3U
+    # @return [String] M3U as a string
     def generate(playlist)
       text = "#EXTM3U\n"
       playlist.tracks.each do |t|

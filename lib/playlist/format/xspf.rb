@@ -3,6 +3,9 @@ require 'nokogiri'
 # Module to parse and generate XSPF playlists
 module Playlist::Format::XSPF
   class << self
+    # Parse a XSPF file into a new Playlist object
+    # @param input [String, IO] the source of the XSPF file
+    # @return [Playlist] a new Playlist object
     def parse(input)
       Playlist.new do |playlist|
         doc = Nokogiri::XML(input)
@@ -13,6 +16,9 @@ module Playlist::Format::XSPF
       end
     end
 
+    # Generate a XSPF file from a Playlist object
+    # @param playlist [Playlist] the playlist
+    # @return [String] the XSPF playlist as a String
     def generate(playlist)
       builder = Nokogiri::XML::Builder.new do |xml|
         xml.playlist(:version => 1, :xmlns => 'http://xspf.org/ns/0/') do
