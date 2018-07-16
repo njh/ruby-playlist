@@ -1,3 +1,5 @@
+[![Build Status](https://travis-ci.org/njh/ruby-playlist.svg)](https://travis-ci.org/njh/ruby-playlist)
+
 # Playlist
 
 This ruby gem allows you to create and manipulate playlists of musical tracks.
