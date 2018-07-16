@@ -1,5 +1,9 @@
 require 'nokogiri'
 
+unless Nokogiri::XML::Node.respond_to?(:content_at)
+  require 'playlist/ext/content_at.rb'
+end
+
 # Module to parse and generate XSPF playlists
 module Playlist::Format::XSPF
   class << self
@@ -9,7 +13,7 @@ module Playlist::Format::XSPF
     def parse(input)
       Playlist.new do |playlist|
         doc = Nokogiri::XML(input)
-        playlist.title = inner_text_or_nil(doc, '/xmlns:playlist/xmlns:title')
+        playlist.title = doc.content_at('/xmlns:playlist/xmlns:title')
         doc.xpath('/xmlns:playlist/xmlns:trackList/xmlns:track').each do |track|
           playlist.tracks << parse_track(track)
         end
@@ -35,10 +39,10 @@ module Playlist::Format::XSPF
 
     def parse_track(doc)
       Playlist::Track.new do |track|
-        track.creator = inner_text_or_nil(doc, 'xmlns:creator')
-        track.title = inner_text_or_nil(doc, 'xmlns:title')
-        track.location = inner_text_or_nil(doc, 'xmlns:location')
-        if (duration = inner_text_or_nil(doc, 'xmlns:duration'))
+        track.creator = doc.content_at('./xmlns:creator')
+        track.title = doc.content_at('./xmlns:title')
+        track.location = doc.content_at('./xmlns:location')
+        if (duration = doc.content_at('./xmlns:duration'))
           track.duration = duration.to_f / 1000
         end
       end
@@ -51,12 +55,6 @@ module Playlist::Format::XSPF
         xml.creator(track.creator) unless track.creator.nil?
         xml.duration((track.duration * 1000).to_i) unless track.duration.nil?
       end
-    end
-
-    ## FIXME: how to do this better?
-    def inner_text_or_nil(doc, path)
-      element = doc.at_xpath(path)
-      element.inner_text unless element.nil?
     end
   end
 end
