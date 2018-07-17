@@ -56,6 +56,17 @@ class Playlist
     @tracks.map(&:duration).compact.inject(:+)
   end
 
+  # Calculate the start track times based on the duration.
+  # This method will only overwrite the start times, if not set
+  def calculate_start_times
+    time = tracks.first.start_time || 0
+    tracks.each do |track|
+      break if track.duration.nil?
+      time = (track.start_time ||= time)
+      time += track.duration
+    end
+  end
+
   autoload :Contributor, 'playlist/contributor'
   autoload :Track, 'playlist/track'
   autoload :Format, 'playlist/format'
