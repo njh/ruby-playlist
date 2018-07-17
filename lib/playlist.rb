@@ -14,6 +14,11 @@ class Playlist
   # @return [String]
   attr_accessor :annotation
 
+  # A URI (or filename) to the location of the media
+  # Use this if the playlist is a single file
+  # @return [String]
+  attr_accessor :media_location
+
   # A URL to get more inforamtion about this playlist
   # @return [String]
   attr_accessor :info_url
