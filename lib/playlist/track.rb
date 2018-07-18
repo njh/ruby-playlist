@@ -81,6 +81,19 @@ class Playlist::Track
   end
   alias artist= performer=
 
+  # Get a conactinated list of composers for this track
+  # @return [String] the name of the composer or nil
+  def composer
+    contributor_names(:composer)
+  end
+
+  # Set the name of the composer for the track
+  # Removes any existing composers
+  # @param name [String] the name the composer
+  def composer=(name)
+    replace_contributor(:composer, name)
+  end
+
   # Set the duration of the track
   # If the duration is 0 or -1, then the duration is set to nil
   # @param seconds [Numeric] the duration of the track in seconds

@@ -171,6 +171,25 @@ describe Playlist::Track do
     end
   end
 
+  describe '#composer' do
+    let(:track) { Playlist::Track.new(:title => 'Let Me Live') }
+
+    it 'should return nil if there is no composer' do
+      expect(track.composer).to be_nil
+    end
+
+    it 'should allow setting and returning the composer name' do
+      track.composer = 'Amir Izadkhah'
+      expect(track.composer).to eq('Amir Izadkhah')
+    end
+
+    it 'should replace one composer name with another' do
+      track.composer = 'Incorrect composer'
+      track.composer = 'Amir Izadkhah'
+      expect(track.composer).to eq('Amir Izadkhah')
+    end
+  end
+
   describe '#to_h' do
     it 'returns all the track attributes as a Hash' do
       attr = {
