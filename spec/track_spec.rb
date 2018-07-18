@@ -122,6 +122,55 @@ describe Playlist::Track do
     end
   end
 
+  describe '#creator' do
+    let(:track) { Playlist::Track.new(:title => 'Let Me Live') }
+
+    it 'should return nil if there is no creator' do
+      expect(track.creator).to be_nil
+    end
+
+    it 'should allow setting and returning the creator name' do
+      track.creator = 'Rudimental'
+      expect(track.creator).to eq('Rudimental')
+    end
+
+    it 'should replace one creator name with another' do
+      track.creator = 'Major Lazer'
+      track.creator = 'Rudimental'
+      expect(track.creator).to eq('Rudimental')
+    end
+  end
+
+  describe '#performer' do
+    let(:track) { Playlist::Track.new(:title => 'Let Me Live') }
+
+    it 'should return nil if there are no performers' do
+      expect(track.performer).to be_nil
+    end
+
+    it 'should allow setting and returning the performer name' do
+      track.performer = 'Rudimental'
+      expect(track.performer).to eq('Rudimental')
+    end
+
+    it 'should return the creator name, if there are no performers' do
+      track.creator = 'Rudimental'
+      expect(track.performer).to eq('Rudimental')
+    end
+
+    it 'should allow using the #artist alias' do
+      track.artist = 'Rudimental'
+      expect(track.artist).to eq('Rudimental')
+      expect(track.performer).to eq('Rudimental')
+    end
+
+    it 'should replace one performer name with another' do
+      track.performer = 'Major Lazer'
+      track.performer = 'Rudimental'
+      expect(track.performer).to eq('Rudimental')
+    end
+  end
+
   describe '#to_h' do
     it 'returns all the track attributes as a Hash' do
       attr = {
