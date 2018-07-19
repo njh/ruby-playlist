@@ -3,32 +3,38 @@ require 'spec_helper'
 describe Playlist::Format::Cue do
   describe '#parse' do
     describe 'a cue sheet with basic information' do
-      let(:playlist) { Playlist::Format::Cue.parse(fixture('faithless.cue')) }
+      let(:playlist) do
+        Playlist::Format::Cue.parse(
+          fixture('stars-of-cctv.cue')
+        )
+      end
 
       it 'parses eight tracks in the cue sheet' do
-        expect(playlist.tracks.count).to eq(8)
+        expect(playlist.tracks.count).to eq(11)
       end
 
       it 'parses the title of the cue sheet' do
-        expect(playlist.title).to eq('Live in Berlin')
+        expect(playlist.title).to eq('Stars of CCTV')
       end
 
       it 'parses the media location' do
-        expect(playlist.media_location).to eq('Faithless - Live in Berlin.mp3')
+        expect(playlist.media_location).to eq('stars-of-cctv.mp3')
       end
 
       it 'parses the track performer, title and start time from Track 1' do
         expect(playlist.tracks[0].track_number).to eq(1)
-        expect(playlist.tracks[0].performer).to eq('Faithless')
-        expect(playlist.tracks[0].title).to eq('Reverence')
+        expect(playlist.tracks[0].performer).to eq('Hard-Fi')
+        expect(playlist.tracks[0].title).to eq('Cash Machine')
+        expect(playlist.tracks[0].isrc).to eq('GBAHS0500147')
         expect(playlist.tracks[0].start_time).to eq(0)
       end
 
-      it 'parses the track performer, title and start time from Track 8' do
-        expect(playlist.tracks[7].track_number).to eq(8)
-        expect(playlist.tracks[7].performer).to eq('Faithless')
-        expect(playlist.tracks[7].title).to eq('God Is a DJ')
-        expect(playlist.tracks[7].start_time).to eq(2555)
+      it 'parses the track performer, title and start time from Track 11' do
+        expect(playlist.tracks[10].track_number).to eq(11)
+        expect(playlist.tracks[10].performer).to eq('Hard-Fi')
+        expect(playlist.tracks[10].title).to eq('Stars of CCTV')
+        expect(playlist.tracks[10].isrc).to eq('GBAHS0500157')
+        expect(playlist.tracks[10].start_time).to eq(2467.0)
       end
     end
   end
@@ -47,7 +53,8 @@ describe Playlist::Format::Cue do
       playlist.add_track(
         :title => 'Song 2',
         :creator => 'Blur',
-        :duration => 110
+        :duration => 110,
+        :isrc => 'GBAYE9600015'
       )
 
       text = Playlist::Format::Cue.generate(playlist)

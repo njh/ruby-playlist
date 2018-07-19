@@ -25,9 +25,9 @@ module Playlist::Format::Cue
       end
     end
 
-    # Generate a human readable list of tracks from a Playlist
+    # Generate a Cue Sheet from a Playlist
     # @param playlist [Playlist] the playlist
-    # @return [String] the playlist with one line per track
+    # @return [String] the playlist in Cue Sheet format
     def generate(playlist)
       text = ''
       playlist.calculate_start_times
@@ -48,6 +48,8 @@ module Playlist::Format::Cue
         track.title = Regexp.last_match(1)
       elsif line =~ /^\s*PERFORMER \"?(.+?)\"?$/
         track.performer = Regexp.last_match(1)
+      elsif line =~ /^\s*ISRC \"?(\w+?)\"?$/
+        track.isrc = Regexp.last_match(1)
       elsif line =~ /^\s*INDEX /
         track.start_time = parse_time(line)
       else
@@ -68,6 +70,7 @@ module Playlist::Format::Cue
       text += generate_line(1, 'TRACK', format('%2.2d AUDIO', track_num), false)
       text += generate_line(2, 'TITLE', track.title)
       text += generate_line(2, 'PERFORMER', track.performer)
+      text += generate_line(2, 'ISRC', track.isrc)
       text += generate_line(2, 'INDEX 01', format_time(track.start_time), false)
       text
     end

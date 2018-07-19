@@ -1,0 +1,59 @@
+REM GENRE Indie Rock
+REM DATE 2008
+TITLE "Stars of CCTV"
+FILE "stars-of-cctv.mp3" MP3
+  TRACK 01 AUDIO
+    TITLE "Cash Machine"
+    PERFORMER "Hard-Fi"
+    ISRC "GBAHS0500147"
+    INDEX 01 00:00:00
+  TRACK 02 AUDIO
+    TITLE "Middle Eastern Holiday"
+    PERFORMER "Hard-Fi"
+    ISRC "GBAHS0500148"
+    INDEX 01 03:43:00
+  TRACK 03 AUDIO
+    TITLE "Tied Up Too Tight"
+    PERFORMER "Hard-Fi"
+    ISRC "GBAHS0500149"
+    INDEX 01 07:27:00
+  TRACK 04 AUDIO
+    TITLE "Gotta Reason"
+    PERFORMER "Hard-Fi"
+    ISRC "GBAHS0500150"
+    INDEX 01 12:16:00
+  TRACK 05 AUDIO
+    TITLE "Hard to Beat"
+    PERFORMER "Hard-Fi"
+    ISRC "GBAHS0500151"
+    INDEX 01 15:05:00
+  TRACK 06 AUDIO
+    TITLE "Unnecessary Trouble"
+    PERFORMER "Hard-Fi"
+    ISRC "GBAHS0500152"
+    INDEX 01 19:18:00
+  TRACK 07 AUDIO
+    TITLE "Move On Now"
+    PERFORMER "Hard-Fi"
+    ISRC "GBAHS0500153"
+    INDEX 01 23:02:00
+  TRACK 08 AUDIO
+    TITLE "Better Do Better"
+    PERFORMER "Hard-Fi"
+    ISRC "GBAHS0500154"
+    INDEX 01 28:10:00
+  TRACK 09 AUDIO
+    TITLE "Feltham Is Singing Out"
+    PERFORMER "Hard-Fi"
+    ISRC "GBAHS0500155"
+    INDEX 01 32:48:00
+  TRACK 10 AUDIO
+    TITLE "Living for the Weekend"
+    PERFORMER "Hard-Fi"
+    ISRC "GBAHS0500156"
+    INDEX 01 37:25:00
+  TRACK 11 AUDIO
+    TITLE "Stars of CCTV"
+    PERFORMER "Hard-Fi"
+    ISRC "GBAHS0500157"
+    INDEX 01 41:07:00
