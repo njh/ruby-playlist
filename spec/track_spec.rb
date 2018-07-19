@@ -38,6 +38,30 @@ describe Playlist::Track do
     end
   end
 
+  describe '#isrc' do
+    let(:track) { Playlist::Track.new(:title => 'Let Me Live') }
+
+    it 'should return nil if there is no isrc' do
+      expect(track.composer).to be_nil
+    end
+
+    it 'should allow setting and returning the ISRC' do
+      track.isrc = 'GBAHS1800368'
+      expect(track.isrc).to eq('GBAHS1800368')
+    end
+
+    it 'should replace one ISRC with another' do
+      track.isrc = 'GBAHS1800488'
+      track.isrc = 'GBAHS1800368'
+      expect(track.isrc).to eq('GBAHS1800368')
+    end
+
+    it 'should be able to fetch ISRC via identifiers hash' do
+      track.isrc = 'GBAHS1800368'
+      expect(track.identifiers[:isrc]).to eq('GBAHS1800368')
+    end
+  end
+
   describe '#add_contributor=' do
     let(:track) { Playlist::Track.new }
 

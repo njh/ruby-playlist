@@ -58,6 +58,18 @@ class Playlist::Track
     yield(self) if block_given?
   end
 
+  # Get the International Standard Recording Code for this track
+  # @return [String] the ISRC for the track
+  def isrc
+    @identifiers[:isrc]
+  end
+
+  # Set the International Standard Recording Code for this track
+  # @param isrc [String] the ISRC for the track
+  def isrc=(isrc)
+    @identifiers[:isrc] = isrc
+  end
+
   # Get a concatinated list of contributors names with no role
   # @return [String]
   def creator
