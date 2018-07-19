@@ -27,6 +27,11 @@ class Playlist
   # @return [String]
   attr_accessor :license
 
+  # Get a hash of identifier for this playlist
+  # Identifiers can either be Strings or URIs
+  # @return [Hash] an hash of identifiers
+  attr_reader :identifiers
+
   # Get the array that contains the list of track for this playlist
   # @return [Array<Track>] an array of tracks in the playlist
   attr_reader :tracks

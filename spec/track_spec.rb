@@ -198,7 +198,12 @@ describe Playlist::Track do
         :duration => 10
       }
       track = Playlist::Track.new(attr)
-      expect(track.to_h).to eq(attr.merge(:contributors => []))
+      expect(track.to_h).to eq(
+        attr.merge(
+          :contributors => [],
+          :identifiers => {}
+        )
+      )
     end
   end
 end

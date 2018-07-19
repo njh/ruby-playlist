@@ -6,6 +6,11 @@ class Playlist::Contributor
   # @return [String]
   attr_accessor :name
 
+  # Get a hash of identifier for this Contributor
+  # Identifiers can either be Strings or URIs
+  # @return [Hash] an hash of identifiers
+  attr_reader :identifiers
+
   # The role of the contribrition to the track
   #
   # Recommended values for role:
@@ -18,6 +23,7 @@ class Playlist::Contributor
 
   # Create a new Contributor
   def initialize(attr = nil)
+    @identifiers = {}
     if attr.is_a?(Hash)
       attr.each_pair do |key, value|
         send("#{key}=", value)

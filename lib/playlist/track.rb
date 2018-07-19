@@ -37,6 +37,11 @@ class Playlist::Track
   # @return [Integer, Float]
   attr_reader :duration
 
+  # Get a hash of identifier for this Track
+  # Identifiers can either be Strings or URIs
+  # @return [Hash] an hash of identifiers
+  attr_reader :identifiers
+
   # Get the array of the contributors to this Track
   # @return [Array<Contributor>] an array of tracks in the playlist
   attr_reader :contributors
@@ -45,6 +50,7 @@ class Playlist::Track
   # @param attr [Hash] a hash of attibute values to set
   def initialize(attr = {})
     @contributors = []
+    @identifiers = {}
     attr.each_pair do |key, value|
       send("#{key}=", value)
     end
