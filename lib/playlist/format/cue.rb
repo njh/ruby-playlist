@@ -33,7 +33,7 @@ module Playlist::Format::Cue
       playlist.calculate_start_times
       text += generate_line(0, 'TITLE', playlist.title)
       text += generate_line(
-        0, 'FILENAME', format_filename(playlist.media_location), false
+        0, 'FILE', format_filename(playlist.media_location), false
       )
       playlist.tracks.each_with_index do |track, index|
         text += generate_track(track, index + 1)

@@ -1,5 +1,5 @@
 TITLE "My Great Playlist"
-FILENAME "basic.mp3" MP3
+FILE "basic.mp3" MP3
   TRACK 01 AUDIO
     TITLE "One One One"
     PERFORMER "Hot Chip"
