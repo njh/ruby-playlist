@@ -117,6 +117,19 @@ class Playlist::Track
     replace_contributor(:composer, name)
   end
 
+  # Get a conactinated list of arrangers for this track
+  # @return [String] the name of the arranger or nil
+  def arranger
+    contributor_names(:arranger)
+  end
+
+  # Set the name of the arranger for the track
+  # Removes any existing arrangers
+  # @param name [String] the name the arranger
+  def arranger=(name)
+    replace_contributor(:arranger, name)
+  end
+
   # Set the duration of the track
   # If the duration is 0 or -1, then the duration is set to nil
   # @param seconds [Numeric] the duration of the track in seconds
