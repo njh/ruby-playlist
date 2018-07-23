@@ -9,7 +9,6 @@ It supports parsing and generating playlists in the following formats:
 * M3U
 * XSPF
 * A simple human readable format
-* SciSys dira XML
 
 ## Installation
 
