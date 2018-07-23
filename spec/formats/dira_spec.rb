@@ -17,6 +17,7 @@ describe Playlist::Format::Dira do
         expect(playlist.tracks[0].title).to eq('Back For The First Time')
         expect(playlist.tracks[0].performer).to eq('Caspa')
         expect(playlist.tracks[0].album).to eq('Alpha Omega')
+        expect(playlist.tracks[0].catalogue_number).to eq('643157426073')
         expect(playlist.tracks[0].record_label).to eq('Dub Police')
         expect(playlist.tracks[0].track_number).to eq('015')
         expect(playlist.tracks[0].duration).to eq(276.192)

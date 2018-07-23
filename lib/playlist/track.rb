@@ -11,6 +11,11 @@ class Playlist::Track
   # @return [String]
   attr_accessor :album
 
+  # The catalogue number of the album that the track came from
+  # Also known as the UPC/EAN code
+  # @return [String]
+  attr_accessor :catalogue_number
+
   # The number of the track on the album it came from
   # @return [Integer]
   attr_accessor :track_number

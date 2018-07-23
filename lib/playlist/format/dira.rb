@@ -31,6 +31,7 @@ module Playlist::Format::Dira
       Playlist::Track.new do |track|
         track.title = doc.content_at('./CLIP/CLIP_INFO/GENE_TITLE')
         track.album = doc.content_at('./CLIP/CLIP_INFO/GENE_ALBUM')
+        track.catalogue_number = doc.content_at('./CLIP/CLIP_INFO/GENE_EAN')
         track.track_number = doc.content_at('./CLIP/CLIP_INFO/GENE_TRACK')
         track.side = doc.content_at('./CLIP/CLIP_INFO/GENE_SIDE')
         track.record_label = doc.content_at('./CLIP/CLIP_INFO/GENE_LABEL')
