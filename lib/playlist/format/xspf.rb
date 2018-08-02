@@ -43,7 +43,7 @@ module Playlist::Format::XSPF
         track.title = doc.content_at('./xmlns:title')
         track.location = doc.content_at('./xmlns:location')
         if (duration = doc.content_at('./xmlns:duration'))
-          track.duration = duration.to_f / 1000
+          track.duration = duration.to_i
         end
       end
     end
@@ -53,7 +53,7 @@ module Playlist::Format::XSPF
         xml.location(track.location) unless track.location.nil?
         xml.title(track.title) unless track.title.nil?
         xml.creator(track.creator) unless track.creator.nil?
-        xml.duration((track.duration * 1000).to_i) unless track.duration.nil?
+        xml.duration(track.duration) unless track.duration.nil?
       end
     end
   end

@@ -92,16 +92,20 @@ module Playlist::Format::Cue
     def parse_time(timestamp)
       if timestamp =~ /INDEX (\d+) (\d+):(\d+):(\d+)/
         if Regexp.last_match(1).to_i == 1
-          mins = Regexp.last_match(2).to_f
-          secs = Regexp.last_match(3).to_f
-          frames = Regexp.last_match(4).to_f
-          (mins * 60) + secs + (frames / 75)
+          mins = Regexp.last_match(2).to_i
+          secs = Regexp.last_match(3).to_i
+          frames = Regexp.last_match(4).to_i
+          (mins * 60000) + (secs * 1000) + (frames * (75/1000))
         end
       end
     end
 
     def format_time(duration)
-      duration = 0 if duration.nil?
+      if duration.nil?
+        duration = 0
+      else
+        duration = duration.to_f / 1000
+      end
       mins = (duration / 60).floor
       secs = (duration % 60).floor
       frames = ((duration - duration.floor) * 75).round

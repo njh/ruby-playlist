@@ -32,13 +32,13 @@ class Playlist::Track
   # @return [String]
   attr_accessor :publisher
 
-  # The time a track starts playing at, in seconds.
-  # May be a Float to include fractions of a second.
+  # The time a track starts playing at, in milliseconds
+  # May be a Float to include fractions of a millisecond.
   # @return [Integer, Float]
   attr_accessor :start_time
 
-  # The duration of the track in seconds.
-  # May be a Float to include fractions of a second.
+  # The duration of the track in milliseconds
+  # May be a Float to include fractions of a millisecond.
   # @return [Integer, Float]
   attr_reader :duration
 
@@ -133,15 +133,15 @@ class Playlist::Track
   # Set the duration of the track
   # If the duration is 0 or -1, then the duration is set to nil
   # @param seconds [Numeric] the duration of the track in seconds
-  def duration=(seconds)
-    if seconds.is_a?(Numeric)
-      @duration = seconds
+  def duration=(milliseconds)
+    if milliseconds.is_a?(Numeric)
+      @duration = milliseconds
     else
-      seconds = seconds.to_s
-      @duration = if seconds =~ /\./
-                    seconds.to_f
+      milliseconds = milliseconds.to_s
+      @duration = if milliseconds =~ /\./
+                    milliseconds.to_f
                   else
-                    seconds.to_i
+                    milliseconds.to_i
                   end
     end
     @duration = nil if [0, -1].include?(@duration)

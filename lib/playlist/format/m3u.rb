@@ -10,7 +10,7 @@ module Playlist::Format::M3U
         track = Playlist::Track.new
         input.each_line do |line|
           if line =~ /^#EXTINF:(-?\d+),\s*(.+?)\s*-\s*(.+?)\s*$/
-            track.duration = Regexp.last_match(1)
+            track.duration = Regexp.last_match(1).to_i * 1000
             track.creator = Regexp.last_match(2)
             track.title = Regexp.last_match(3)
           else
@@ -30,7 +30,7 @@ module Playlist::Format::M3U
     def generate(playlist)
       text = "#EXTM3U\n"
       playlist.tracks.each do |t|
-        text += "#EXTINF:#{t.duration.to_i},#{t.artist} - #{t.title}\n"
+        text += "#EXTINF:#{(t.duration / 1000).round},#{t.artist} - #{t.title}\n"
         text += "#{t.location}\n"
       end
       text

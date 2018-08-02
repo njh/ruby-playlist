@@ -26,14 +26,14 @@ describe Playlist::Track do
     end
 
     it 'should convert a string duration to an integer' do
-      track.duration = '140'
-      expect(track.duration).to eq(140)
+      track.duration = '140000'
+      expect(track.duration).to eq(140000)
       expect(track.duration).to be_a(Integer)
     end
 
     it 'should convert a decimal string duration to a float' do
-      track.duration = '234.776'
-      expect(track.duration).to eq(234.776)
+      track.duration = '234000.776'
+      expect(track.duration).to eq(234000.776)
       expect(track.duration).to be_a(Float)
     end
   end
@@ -219,7 +219,7 @@ describe Playlist::Track do
       attr = {
         :location => 'filename.mp3',
         :title => 'Track Title',
-        :duration => 10
+        :duration => 10000
       }
       track = Playlist::Track.new(attr)
       expect(track.to_h).to eq(

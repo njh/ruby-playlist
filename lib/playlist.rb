@@ -54,7 +54,7 @@ class Playlist
     @tracks << (args.is_a?(Track) ? args : Track.new(args))
   end
 
-  # Get the total duration of this playlist
+  # Get the total duration of this playlist in milliseconds
   # If any tracks on the playlist don't have a duation, then they are ignored
   # @return [Integer, Float]
   def duration
