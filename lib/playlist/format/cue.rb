@@ -11,9 +11,9 @@ module Playlist::Format::Cue
         input.each_line do |line|
           if line =~ /^\s*REM\s/
             next
-          elsif line =~ /^\s*TRACK (\d+) AUDIO/
+          elsif (matches = line.match(/^\s*TRACK (\d+) AUDIO/))
             track = Playlist::Track.new(
-              :track_number => Regexp.last_match(1).to_i
+              :track_number => matches[1].to_i
             )
             playlist.add_track(track)
           elsif !track.nil?
@@ -44,24 +44,24 @@ module Playlist::Format::Cue
     protected
 
     def parse_track_line(track, line)
-      if line =~ /^\s*TITLE \"?(.+?)\"?$/
-        track.title = Regexp.last_match(1)
-      elsif line =~ /^\s*PERFORMER \"?(.+?)\"?$/
-        track.performer = Regexp.last_match(1)
-      elsif line =~ /^\s*ISRC \"?(\w+?)\"?$/
-        track.isrc = Regexp.last_match(1)
-      elsif line =~ /^\s*INDEX /
-        track.start_time = parse_time(line)
+      if (matches = line.match(/^\s*TITLE \"?(.+?)\"?$/))
+        track.title = matches[1]
+      elsif (matches = line.match(/^\s*PERFORMER \"?(.+?)\"?$/))
+        track.performer = matches[1]
+      elsif (matches = line.match(/^\s*ISRC \"?(\w+?)\"?$/))
+        track.isrc = matches[1]
+      elsif (matches = line.match(/^\s*INDEX (.+)$/))
+        track.start_time = parse_time(matches[1])
       else
         warn "Unknown command: #{line}"
       end
     end
 
     def parse_playlist_line(playlist, line)
-      if line =~ /^\s*TITLE \"?(.+?)\"?$/
-        playlist.title = Regexp.last_match(1)
-      elsif line =~ /^\s*FILE \"?(.+?)\" (\w+)?$/
-        playlist.media_location = Regexp.last_match(1)
+      if (matches = line.match(/^\s*TITLE \"?(.+?)\"?$/))
+        playlist.title = matches[1]
+      elsif (matches = line.match(/^\s*FILE \"?(.+?)\" (\w+)?$/))
+        playlist.media_location = matches[1]
       end
     end
 
@@ -90,11 +90,11 @@ module Playlist::Format::Cue
     end
 
     def parse_time(timestamp)
-      if timestamp =~ /INDEX (\d+) (\d+):(\d+):(\d+)/
-        if Regexp.last_match(1).to_i == 1
-          mins = Regexp.last_match(2).to_i
-          secs = Regexp.last_match(3).to_i
-          frames = Regexp.last_match(4).to_i
+      if (matches = timestamp.match(/(\d+) (\d+):(\d+):(\d+)/))
+        if matches[1].to_i == 1
+          mins = matches[2].to_i
+          secs = matches[3].to_i
+          frames = matches[4].to_i
           (mins * 60_000) + (secs * 1000) + (frames * (75 / 1000))
         end
       end

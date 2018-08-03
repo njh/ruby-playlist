@@ -9,10 +9,10 @@ module Playlist::Format::M3U
       Playlist.new do |playlist|
         track = Playlist::Track.new
         input.each_line do |line|
-          if line =~ /^#EXTINF:(-?\d+),\s*(.+?)\s*-\s*(.+?)\s*$/
-            track.duration = Regexp.last_match(1).to_i * 1000
-            track.creator = Regexp.last_match(2)
-            track.title = Regexp.last_match(3)
+          if (matches = line.match(/^#EXTINF:(-?\d+),\s*(.+?)\s*-\s*(.+?)\s*$/))
+            track.duration = matches[1].to_i * 1000
+            track.creator = matches[2]
+            track.title = matches[3]
           else
             if line =~ /^[^#]\S+.+\s*$/
               track.location = line.strip

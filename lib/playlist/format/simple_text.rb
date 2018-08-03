@@ -20,11 +20,14 @@ module Playlist::Format::SimpleText
     # @param line [String] any object that responds to #each_line
     # @return [Track] a new Track object
     def parse_line(line)
-      if line =~ /^(\d{1,2}[:.]\d{1,2}([:.]\d{1,2})?)?\s*(.+?) - (.+?)$/
+      matches = line.match(
+        /^(\d{1,2}[:.]\d{1,2}([:.]\d{1,2})?)?\s*(.+?) - (.+?)$/
+      )
+      unless matches.nil?
         Playlist::Track.new(
-          :start_time => Regexp.last_match(1),
-          :creator => Regexp.last_match(3).strip,
-          :title => Regexp.last_match(4).strip
+          :start_time => matches[1],
+          :creator => matches[3].strip,
+          :title => matches[4].strip
         )
       end
     end
