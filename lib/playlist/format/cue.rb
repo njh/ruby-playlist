@@ -95,17 +95,14 @@ module Playlist::Format::Cue
           mins = Regexp.last_match(2).to_i
           secs = Regexp.last_match(3).to_i
           frames = Regexp.last_match(4).to_i
-          (mins * 60000) + (secs * 1000) + (frames * (75/1000))
+          (mins * 60_000) + (secs * 1000) + (frames * (75 / 1000))
         end
       end
     end
 
     def format_time(duration)
-      if duration.nil?
-        duration = 0
-      else
-        duration = duration.to_f / 1000
-      end
+      duration = 0 if duration.nil?
+      duration = duration.to_f / 1000
       mins = (duration / 60).floor
       secs = (duration % 60).floor
       frames = ((duration - duration.floor) * 75).round

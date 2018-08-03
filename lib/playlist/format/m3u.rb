@@ -30,7 +30,8 @@ module Playlist::Format::M3U
     def generate(playlist)
       text = "#EXTM3U\n"
       playlist.tracks.each do |t|
-        text += "#EXTINF:#{(t.duration / 1000).round},#{t.artist} - #{t.title}\n"
+        duration = (t.duration / 1000).round
+        text += "#EXTINF:#{duration},#{t.artist} - #{t.title}\n"
         text += "#{t.location}\n"
       end
       text

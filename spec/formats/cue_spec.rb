@@ -34,7 +34,7 @@ describe Playlist::Format::Cue do
         expect(playlist.tracks[10].performer).to eq('Hard-Fi')
         expect(playlist.tracks[10].title).to eq('Stars of CCTV')
         expect(playlist.tracks[10].isrc).to eq('GBAHS0500157')
-        expect(playlist.tracks[10].start_time).to eq(2467000.0)
+        expect(playlist.tracks[10].start_time).to eq(2_467_000.0)
       end
     end
   end
@@ -48,12 +48,12 @@ describe Playlist::Format::Cue do
       playlist.add_track(
         :title => 'One One One',
         :creator => 'Hot Chip',
-        :duration => 215000
+        :duration => 215_000
       )
       playlist.add_track(
         :title => 'Song 2',
         :creator => 'Blur',
-        :duration => 110000,
+        :duration => 110_000,
         :isrc => 'GBAYE9600015'
       )
 

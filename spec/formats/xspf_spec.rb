@@ -17,14 +17,14 @@ describe Playlist::Format::XSPF do
         expect(playlist.tracks[0].title).to eq('One One One')
         expect(playlist.tracks[0].creator).to eq('Hot Chip')
         expect(playlist.tracks[0].location).to eq('one_one_one.mp3')
-        expect(playlist.tracks[0].duration).to eq(215000)
+        expect(playlist.tracks[0].duration).to eq(215_000)
       end
 
       it 'parses the artist, title and location from Track 2' do
         expect(playlist.tracks[1].title).to eq('Song 2')
         expect(playlist.tracks[1].creator).to eq('Blur')
         expect(playlist.tracks[1].location).to eq('song2.mp3')
-        expect(playlist.tracks[1].duration).to eq(110000)
+        expect(playlist.tracks[1].duration).to eq(110_000)
       end
     end
   end
@@ -38,13 +38,13 @@ describe Playlist::Format::XSPF do
           :creator => 'Hot Chip',
           :title => 'One One One',
           :location => 'one_one_one.mp3',
-          :duration => 215000
+          :duration => 215_000
         )
         playlist.add_track(
           :creator => 'Blur',
           :title => 'Song 2',
           :location => 'song2.mp3',
-          :duration => 110000
+          :duration => 110_000
         )
         Playlist::Format::XSPF.generate(playlist)
       end
