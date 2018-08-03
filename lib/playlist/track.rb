@@ -132,7 +132,7 @@ class Playlist::Track
 
   # Set the duration of the track
   # If the duration is 0 or -1, then the duration is set to nil
-  # @param seconds [Numeric] the duration of the track in seconds
+  # @param milliseconds [Numeric] the duration of the track in seconds
   def duration=(milliseconds)
     if milliseconds.is_a?(Numeric)
       @duration = milliseconds
