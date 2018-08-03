@@ -12,6 +12,20 @@ describe Playlist do
     end
   end
 
+  describe '#identifiers' do
+    let(:playlist) { Playlist.new }
+
+    it 'is initially an empty Hash' do
+      expect(playlist.identifiers).to be_a(Hash)
+      expect(playlist.identifiers).to be_empty
+    end
+
+    it 'allows new identifiers to be set' do
+      playlist.identifiers[:take_id] = '866932FA'
+      expect(playlist.identifiers[:take_id]).to eq('866932FA')
+    end
+  end
+
   describe '#add_track' do
     it 'adds a track to the playlist' do
       playlist = Playlist.new(:title => 'My two-track Playlist')

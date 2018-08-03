@@ -12,6 +12,20 @@ describe Playlist::Track do
     end
   end
 
+  describe '#identifiers' do
+    let(:track) { Playlist::Track.new }
+
+    it 'is initially an empty Hash' do
+      expect(track.identifiers).to be_a(Hash)
+      expect(track.identifiers).to be_empty
+    end
+
+    it 'allows new identifiers to be set' do
+      track.identifiers[:take_id] = '866932FA'
+      expect(track.identifiers[:take_id]).to eq('866932FA')
+    end
+  end
+
   describe '#duration=' do
     let(:track) { Playlist::Track.new }
 

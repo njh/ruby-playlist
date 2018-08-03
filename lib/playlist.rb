@@ -40,6 +40,7 @@ class Playlist
   # @param attr [Hash] a hash of attibute values to set
   def initialize(attr = {})
     @tracks = []
+    @identifiers = {}
     attr.each_pair do |key, value|
       send("#{key}=", value)
     end
