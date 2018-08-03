@@ -10,9 +10,9 @@ class Playlist
   # @return [String]
   attr_accessor :creator
 
-  # A description/synopsis of the playlist
+  # A description/annotation/synopsis of the playlist
   # @return [String]
-  attr_accessor :annotation
+  attr_accessor :description
 
   # A URI (or filename) to the location of the media
   # Use this if the playlist is a single file

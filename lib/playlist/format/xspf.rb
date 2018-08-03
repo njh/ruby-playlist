@@ -14,6 +14,9 @@ module Playlist::Format::XSPF
       Playlist.new do |playlist|
         doc = Nokogiri::XML(input)
         playlist.title = doc.content_at('/xmlns:playlist/xmlns:title')
+        playlist.description = doc.content_at(
+          '/xmlns:playlist/xmlns:annotation'
+        )
         doc.xpath('/xmlns:playlist/xmlns:trackList/xmlns:track').each do |track|
           playlist.tracks << parse_track(track)
         end
@@ -27,6 +30,7 @@ module Playlist::Format::XSPF
       builder = Nokogiri::XML::Builder.new do |xml|
         xml.playlist(:version => 1, :xmlns => 'http://xspf.org/ns/0/') do
           xml.title(playlist.title) unless playlist.title.nil?
+          xml.annotation(playlist.description) unless playlist.description.nil?
           xml.trackList do
             playlist.tracks.each { |track| generate_track(xml, track) }
           end

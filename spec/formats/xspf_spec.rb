@@ -9,6 +9,10 @@ describe Playlist::Format::XSPF do
         expect(playlist.title).to eq('Basic Playlist')
       end
 
+      it 'parses the title of the playlist' do
+        expect(playlist.description).to eq('It is really basic')
+      end
+
       it 'parses 2 tracks from the playlist' do
         expect(playlist.tracks.count).to eq(2)
       end
@@ -34,6 +38,7 @@ describe Playlist::Format::XSPF do
       let(:xml) do
         playlist = Playlist.new
         playlist.title = 'Basic Playlist'
+        playlist.description = 'It is really basic'
         playlist.add_track(
           :creator => 'Hot Chip',
           :title => 'One One One',

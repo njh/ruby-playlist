@@ -39,7 +39,7 @@ Playlists can be constructed by passing a list of attributes to the constructor 
 
 ```ruby
 playlist = Playlist.new(:title => "My awesome playlist")
-playlist.annotation = "Each week I add best tracks I can think of."
+playlist.description = "Each week I add best tracks I can think of."
 playlist.add_track(
   :performer => "Jon Hopkins",
   :title => "Everything Connected"
