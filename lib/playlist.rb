@@ -72,6 +72,7 @@ class Playlist
     time = tracks.first.start_time || 0
     tracks.each do |track|
       break if track.duration.nil?
+
       time = (track.start_time ||= time)
       time += track.duration
     end

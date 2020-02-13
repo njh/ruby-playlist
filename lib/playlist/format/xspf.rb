@@ -32,11 +32,14 @@ module Playlist::Format::XSPF
     def generate(playlist)
       builder = Nokogiri::XML::Builder.new do |xml|
         xml.playlist(:version => 1, :xmlns => 'http://xspf.org/ns/0/') do
-          xml.title(playlist.title) unless playlist.title.nil?
-          xml.creator(playlist.creator) unless playlist.creator.nil?
-          xml.annotation(playlist.description) unless playlist.description.nil?
-          xml.image(playlist.image) unless playlist.image.nil?
-          xml.info(playlist.info_url) unless playlist.info_url.nil?
+          build_xml_unless_nil(
+            xml,
+            :title => playlist.title,
+            :creator => playlist.creator,
+            :annotation => playlist.description,
+            :image => playlist.image,
+            :info => playlist.info_url
+          )
           xml.trackList do
             playlist.tracks.each { |track| generate_track(xml, track) }
           end
@@ -63,13 +66,22 @@ module Playlist::Format::XSPF
 
     def generate_track(xml, track)
       xml.track do
-        xml.location(track.location) unless track.location.nil?
-        xml.title(track.title) unless track.title.nil?
-        xml.creator(track.creator) unless track.creator.nil?
-        xml.duration(track.duration) unless track.duration.nil?
-        xml.album(track.album) unless track.album.nil?
-        xml.annotation(track.description) unless track.description.nil?
-        xml.image(track.image) unless track.image.nil?
+        build_xml_unless_nil(
+          xml,
+          :location => track.location,
+          :title => track.title,
+          :creator => track.creator,
+          :duration => track.duration,
+          :album => track.album,
+          :annotation => track.description,
+          :image => track.image
+        )
+      end
+    end
+
+    def build_xml_unless_nil(xml, hash)
+      hash.each_pair do |key, value|
+        xml.send(key, value) unless value.nil?
       end
     end
   end
