@@ -2,7 +2,7 @@ require 'spec_helper'
 
 describe Playlist::Format::XSPF do
   describe '#parse' do
-    describe 'a basic tracklist with artist, title and location' do
+    describe 'a basic playlist with artist, title and location' do
       let(:playlist) { Playlist::Format::XSPF.parse(fixture('basic.xspf')) }
 
       it 'parses the title of the playlist' do
@@ -29,6 +29,36 @@ describe Playlist::Format::XSPF do
         expect(playlist.tracks[1].creator).to eq('Blur')
         expect(playlist.tracks[1].location).to eq('song2.mp3')
         expect(playlist.tracks[1].duration).to eq(110_000)
+      end
+    end
+
+    describe 'a playlist with more than the basic set of fields' do
+      let(:playlist) { Playlist::Format::XSPF.parse(fixture('extended.xspf')) }
+
+      it 'parses the title of the playlist' do
+        expect(playlist.title).to eq('80s Music')
+      end
+
+      it 'parses the creator of the playlist' do
+        expect(playlist.creator).to eq('Jane Doe')
+      end
+
+      it 'parses the info URL of the playlist' do
+        expect(playlist.info_url).to eq('http://example.com/~jane')
+      end
+
+      it 'parses 1 tracks from the playlist' do
+        expect(playlist.tracks.count).to eq(1)
+      end
+
+      it 'parses track metadata' do
+        expect(playlist.tracks[0].title).to eq('No Quarter')
+        expect(playlist.tracks[0].creator).to eq('Led Zeppelin')
+        expect(playlist.tracks[0].album).to eq('Houses of the Holy')
+        expect(playlist.tracks[0].location).to eq('http://example.com/song_1.mp3')
+        expect(playlist.tracks[0].description).to eq('I love this song')
+        expect(playlist.tracks[0].duration).to eq(271_066)
+        expect(playlist.tracks[0].image).to eq('http://images.amazon.com/images/P/B000002J0B.01.MZZZZZZZ.jpg')
       end
     end
   end
