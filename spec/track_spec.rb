@@ -228,6 +228,25 @@ describe Playlist::Track do
     end
   end
 
+  describe '#arranger' do
+    let(:track) { Playlist::Track.new(:title => 'The Lion King') }
+
+    it 'should return nil if there is no arranger' do
+      expect(track.arranger).to be_nil
+    end
+
+    it 'should allow setting and returning the arranger' do
+      track.arranger = 'John Higgins'
+      expect(track.arranger).to eq('John Higgins')
+    end
+
+    it 'should replace one arranger name with another' do
+      track.arranger = 'Incorrect arranger'
+      track.arranger = 'John Higgins'
+      expect(track.arranger).to eq('John Higgins')
+    end
+  end
+
   describe '#to_h' do
     it 'returns all the track attributes as a Hash' do
       attr = {
