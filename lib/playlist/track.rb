@@ -51,6 +51,10 @@ class Playlist::Track
   # @return [Array<Contributor>] an array of tracks in the playlist
   attr_reader :contributors
 
+  # URI of an image associated with this Track
+  # @return [String]
+  attr_accessor :image
+
   # Create a new Track
   # @param attr [Hash] a hash of attibute values to set
   def initialize(attr = {})

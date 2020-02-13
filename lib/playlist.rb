@@ -27,6 +27,10 @@ class Playlist
   # @return [String]
   attr_accessor :license
 
+  # URI of an image associated with this playlist
+  # @return [String]
+  attr_accessor :image
+
   # Get a hash of identifier for this playlist
   # Identifiers can either be Strings or URIs
   # @return [Hash] an hash of identifiers
