@@ -2,6 +2,6 @@
 class Nokogiri::XML::Node
   def content_at(*args)
     node = at(*args)
-    node&.content
+    node.content unless node.nil?
   end
 end

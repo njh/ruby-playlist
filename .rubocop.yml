@@ -21,6 +21,10 @@ Style/SymbolArray:
 Style/ClassAndModuleChildren:
   EnforcedStyle: compact
 
+# Not available in older rubies
+Style/SafeNavigation:
+  Enabled: false
+
 # Disabled because it makes the code longer, more repetitive
 Style/FormatStringToken:
   Enabled: false
