@@ -7,6 +7,7 @@ This ruby gem allows you to create and manipulate playlists of musical tracks.
 It supports parsing and generating playlists in the following formats:
 
 * M3U
+* PLS
 * XSPF
 * A simple human readable format
 * Cue Sheet
