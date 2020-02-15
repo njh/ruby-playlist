@@ -1,0 +1,24 @@
+{
+  "playlist": {
+    "title": "Basic Playlist",
+    "annotation": "It is really basic",
+    "track": [
+      {
+        "location": [
+          "one_one_one.mp3"
+        ],
+        "title": "One One One",
+        "creator": "Hot Chip",
+        "duration": 215000
+      },
+      {
+        "location": [
+          "song2.mp3"
+        ],
+        "title": "Song 2",
+        "creator": "Blur",
+        "duration": 110000
+      }
+    ]
+  }
+}
