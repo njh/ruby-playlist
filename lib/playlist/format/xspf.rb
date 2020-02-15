@@ -1,6 +1,6 @@
 require 'nokogiri'
 
-unless Nokogiri::XML::Node.respond_to?(:content_at)
+unless Nokogiri::XML::Node.method_defined?(:content_at)
   require 'playlist/ext/content_at.rb'
 end
 

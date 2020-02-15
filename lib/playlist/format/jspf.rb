@@ -1,5 +1,7 @@
 require 'json'
 
+require 'playlist/ext/compact_hash.rb' unless Hash.method_defined?(:compact)
+
 # Module to parse and generate JSPF playlists
 module Playlist::Format::JSPF
   class << self
