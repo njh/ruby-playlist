@@ -199,7 +199,11 @@ describe Playlist::Track do
     it 'should allow using the #artist alias' do
       track.artist = 'Rudimental'
       expect(track.artist).to eq('Rudimental')
-      expect(track.performer).to eq('Rudimental')
+      expect(track.creator).to eq('Rudimental')
+
+      track.artist = 'New Rudimental'
+      expect(track.artist).to eq('New Rudimental')
+      expect(track.creator).to eq('New Rudimental')
     end
 
     it 'should replace one performer name with another' do

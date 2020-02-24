@@ -2,7 +2,7 @@ require 'spec_helper'
 
 describe Playlist::Format::JSPF do
   describe '#parse' do
-    describe 'a basic playlist with artist, title and location' do
+    describe 'a basic playlist with creator, title and location' do
       let(:playlist) { Playlist::Format::JSPF.parse(fixture('basic.jspf')) }
 
       it 'parses the title of the playlist' do
@@ -17,14 +17,14 @@ describe Playlist::Format::JSPF do
         expect(playlist.tracks.count).to eq(2)
       end
 
-      it 'parses the artist, title and location from Track 1' do
+      it 'parses the creator, title and location from Track 1' do
         expect(playlist.tracks[0].title).to eq('One One One')
         expect(playlist.tracks[0].creator).to eq('Hot Chip')
         expect(playlist.tracks[0].location).to eq('one_one_one.mp3')
         expect(playlist.tracks[0].duration).to eq(215_000)
       end
 
-      it 'parses the artist, title and location from Track 2' do
+      it 'parses the creator, title and location from Track 2' do
         expect(playlist.tracks[1].title).to eq('Song 2')
         expect(playlist.tracks[1].creator).to eq('Blur')
         expect(playlist.tracks[1].location).to eq('song2.mp3')
@@ -67,7 +67,7 @@ describe Playlist::Format::JSPF do
   end
 
   describe '#generate' do
-    describe 'a basic tracklist with artist, title and location' do
+    describe 'a basic tracklist with creator, title and location' do
       let(:json) do
         playlist = Playlist.new
         playlist.title = 'Basic Playlist'

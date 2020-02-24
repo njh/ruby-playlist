@@ -36,7 +36,7 @@ module Playlist::Format::SimpleText
     # @param playlist [Playlist] the playlist
     # @return [String] the playlist with one line per track
     def generate(playlist)
-      playlist.tracks.map { |t| "#{t.artist} - #{t.title}" }.join("\n") + "\n"
+      playlist.tracks.map { |t| "#{t.creator} - #{t.title}" }.join("\n") + "\n"
     end
   end
 end

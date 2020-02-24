@@ -88,6 +88,7 @@ class Playlist::Track
   def creator
     contributor_names(nil)
   end
+  alias artist creator
 
   # Set the name of the contributor with no role
   # Removes any existing contributors with no role
@@ -95,6 +96,7 @@ class Playlist::Track
   def creator=(name)
     replace_contributor(nil, name)
   end
+  alias artist= creator=
 
   # Get a conactinated list of performers for this track
   # If there are no performers, return contributors with no role
@@ -102,7 +104,6 @@ class Playlist::Track
   def performer
     contributor_names(:performer) || contributor_names(nil)
   end
-  alias artist performer
 
   # Set the name of the track performer
   # Removes any existing performers
@@ -110,7 +111,6 @@ class Playlist::Track
   def performer=(name)
     replace_contributor(:performer, name)
   end
-  alias artist= performer=
 
   # Get a conactinated list of composers for this track
   # @return [String] the name of the composer or nil
