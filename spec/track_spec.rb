@@ -172,6 +172,22 @@ describe Playlist::Track do
       expect(track.creator).to eq('Rudimental')
     end
 
+    it 'should return the performer name, if there is one set' do
+      track.performer = 'Rudimental'
+      expect(track.creator).to eq('Rudimental')
+    end
+
+    it 'should return the composer name, if there is one set' do
+      track.composer = 'Amir Izadkhah'
+      expect(track.creator).to eq('Amir Izadkhah')
+    end
+
+    it 'should return both the composer and performer names' do
+      track.performer = 'Rudimental'
+      track.composer = 'Amir Izadkhah'
+      expect(track.creator).to eq('Rudimental & Amir Izadkhah')
+    end
+
     it 'should replace one creator name with another' do
       track.creator = 'Major Lazer'
       track.creator = 'Rudimental'
@@ -188,11 +204,6 @@ describe Playlist::Track do
 
     it 'should allow setting and returning the performer name' do
       track.performer = 'Rudimental'
-      expect(track.performer).to eq('Rudimental')
-    end
-
-    it 'should return the creator name, if there are no performers' do
-      track.creator = 'Rudimental'
       expect(track.performer).to eq('Rudimental')
     end
 

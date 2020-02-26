@@ -83,10 +83,11 @@ class Playlist::Track
     @identifiers[:isrc] = isrc
   end
 
-  # Get a concatinated list of contributors names with no role
+  # Get a concatinated list of the contributors to this track
+  # Inclues contributors both with and without a role assocated with them
   # @return [String]
   def creator
-    contributor_names(nil)
+    contributor_names
   end
   alias artist creator
 
@@ -102,7 +103,7 @@ class Playlist::Track
   # If there are no performers, return contributors with no role
   # @return [String]
   def performer
-    contributor_names(:performer) || contributor_names(nil)
+    contributor_names(:performer)
   end
 
   # Set the name of the track performer

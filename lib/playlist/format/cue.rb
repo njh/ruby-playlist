@@ -69,7 +69,7 @@ module Playlist::Format::Cue
       text = ''
       text += generate_line(1, 'TRACK', format('%2.2d AUDIO', track_num), false)
       text += generate_line(2, 'TITLE', track.title)
-      text += generate_line(2, 'PERFORMER', track.performer)
+      text += generate_line(2, 'PERFORMER', track.performer || track.creator)
       text += generate_line(2, 'ISRC', track.isrc)
       text += generate_line(2, 'INDEX 01', format_time(track.start_time), false)
       text

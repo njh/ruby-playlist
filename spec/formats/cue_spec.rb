@@ -47,7 +47,7 @@ describe Playlist::Format::Cue do
       )
       playlist.add_track(
         :title => 'One One One',
-        :creator => 'Hot Chip',
+        :performer => 'Hot Chip',
         :duration => 215_000
       )
       playlist.add_track(
